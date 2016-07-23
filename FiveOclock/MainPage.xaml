@@ -1,0 +1,22 @@
+﻿<Page
+    x:Class="FiveOclock.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:FiveOclock"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d" RequestedTheme="Dark">
+    <Page.Background>
+        <ImageBrush Stretch="UniformToFill" ImageSource="Assets/McSorleys_Bar_1912.jpg"/>
+    </Page.Background>
+
+    <Grid>
+        <StackPanel Margin="20,10,10,10" >
+            <TextBlock Text="It's five o'clock somewhere!" Style="{ThemeResource HeaderTextBlockStyle}"/>
+            <TextBlock Name="lblTime" Text="00:00" Margin="0,10,0,0" Style="{ThemeResource HeaderTextBlockStyle}"/>
+            <TextBlock Text="local time" Margin="0, 0, 0, 20"/>
+            <TextBlock Text="It's now five o'clock in the following cities:" />
+            <ListBox Name="lstCities" DisplayMemberPath="Name" Background="Transparent"/>
+        </StackPanel>
+    </Grid>
+</Page>

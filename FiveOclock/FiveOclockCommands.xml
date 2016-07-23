@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<VoiceCommands xmlns="http://schemas.microsoft.com/voicecommands/1.2">
+  <CommandSet xml:lang="en-us" Name="WeatherTalkCommandSet_en-us">
+    <CommandPrefix> Five O'clock </CommandPrefix>
+    <Example> It's Five O'clock where? </Example>
+
+    <Command Name="FiveOclockWhere">
+      <Example> It's Five O'clock where?  </Example>
+      <ListenFor RequireAppName="ExplicitlySpecified"> It's {builtin:AppName} where [right] [now] </ListenFor>
+      <ListenFor RequireAppName="ExplicitlySpecified"> Can you [please] tell me it's {builtin:AppName} where [right] [now] </ListenFor>
+      <ListenFor RequireAppName="ExplicitlySpecified"> In what city is it {builtin:AppName} [right] [now] </ListenFor>
+      <ListenFor RequireAppName="ExplicitlySpecified"> Where [in the world] is it {builtin:AppName} [right] [now] </ListenFor>
+      <Feedback> Can't wait? Let me check... </Feedback>
+      <VoiceCommandService Target="FOCVoiceCommandService"/>
+    </Command>
+
+  </CommandSet> 
+
+  <!-- Other CommandSets for other languages -->
+
+</VoiceCommands>
