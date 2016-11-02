@@ -26,6 +26,7 @@ using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Storage;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -61,12 +62,19 @@ namespace FiveOclock
         /// <param name="e">Details about the launch request and process.</param>
         protected override async void OnLaunched(LaunchActivatedEventArgs e)
         {
-            var storageFile =
-                await Windows.Storage.StorageFile.GetFileFromApplicationUriAsync(
-                new Uri("ms-appx:///FiveOclockCommands.xml"));
-            await
-                Windows.ApplicationModel.VoiceCommands.VoiceCommandDefinitionManager
-                .InstallCommandDefinitionsFromStorageFileAsync(storageFile);
+            try
+            {
+                // Install the main VCD. Since there's no simple way to test that the VCD has been imported, or that it's your most recent
+                // version, it's not unreasonable to do this upon app load.
+                StorageFile vcdStorageFile = await Package.Current.InstalledLocation.GetFileAsync(@"FiveOclockCommands.xml");
+                await Windows.ApplicationModel.VoiceCommands.VoiceCommandDefinitionManager
+                    .InstallCommandDefinitionsFromStorageFileAsync(vcdStorageFile);
+            }
+            catch (Exception ex)
+            {
+                //TO DO: We should log this somewhere
+                System.Diagnostics.Debug.WriteLine("Installing Voice Commands Failed: " + ex.ToString());
+            }
 
 #if DEBUG
             if (System.Diagnostics.Debugger.IsAttached)
